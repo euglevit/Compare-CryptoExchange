@@ -1,30 +1,22 @@
 $(document).ready(function() {
 
-    let aUrl = 'https://min-api.cryptocompare.com/data/histoday';
+    let aUrl = 'https://min-api.cryptocompare.com/data/price';
     let bUrl = 'https://api.coinmarketcap.com/v1/ticker';
     let cUrl = 'https://www.cryptocompare.com/api/data/coinlist';
     let dUrl = 'https://min-api.cryptocompare.com/data/all/exchanges';
 
 
 
-    function getCrypCompApi() {
-        let query = {
-            // ts: $.now(),
-            fsym: 'ETH',
-            tsym: 'USD',
 
-        }
-        $.getJSON(aUrl, query, getData);
-    };
 
     function getExchangeApi() {
-    	$.getJSON(dUrl,renderExchangeList);
+        $.getJSON(dUrl, renderExchangeList);
     }
 
     function getCoinMarkCapApi() {
         $.ajax({
             type: 'GET',
-            url: 'https://api.coinmarketcap.com/v1/ticker/?limit=10'
+            url: 'https://api.coinmarketcap.com/v1/ticker/?limit=20'
         }).done(renderCoinList);
     }
 
@@ -47,20 +39,29 @@ $(document).ready(function() {
     }
 
     function renderExchangeList(coinChoice) {
-    	console.log(coinChoice);
-    	$.getJSON(dUrl, function(data){
-    		let data2 = Object.values(data);
-    		let data3 = Object.keys(data);
-			for(let i=0; i < data2.length; i++){
-				if(coinChoice in data2[i])
-				$('.exchangeList').append(`
-					<li class=exchangeItem'>${data3[i]}</li>
+    	$('.exchangeList').html('');
+        console.log(coinChoice);
+        $.getJSON(dUrl, function(data) {
+            let data2 = Object.values(data);
+            let data3 = Object.keys(data);
+            for (let i = 0; i < data2.length; i++) {
+                if (coinChoice in data2[i]) {
+                    $.getJSON(aUrl, { fsym: coinChoice, tsyms: 'USD', e: data3[i] }, function(info) {
+                        if (info.USD != undefined) {
+                            $('.exchangeList').append(`
+						<li class=exchangeItem'>${data3[i]}</li>
+						<li class="dollars">${info.USD}</li>
+						`)
+                        } else(console.log('did not work'))
+                    });
+                }
+            };
+        })
 
-				`)
-			};
-    	})
-    	
     }
+
+
+
 
     function clickCoin() {
         $(document).on('click', '.coin', function(event) {
@@ -71,12 +72,12 @@ $(document).ready(function() {
     }
 
 
-    getCrypCompApi();
+    // getCrypCompApi();
     getCoinMarkCapApi();
     clickCoin();
 
 
-})
+});
 
 
 // renderCoinList();
