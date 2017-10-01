@@ -23,6 +23,7 @@ $(document).ready(function() {
     function renderExchangeList(coinChoice) {
         $('.exchangeList').html('');
         $('.exchangeList').html(`<span class='coin-choice-button'>Coin Name: ${coinChoice}</span>`);
+        $('.exchangeList').css('height', '100vh');
         let total = [];
         console.log(coinChoice);
         $.getJSON(bUrl, function(data) {
@@ -44,51 +45,38 @@ $(document).ready(function() {
     }
 
     function clickCoin(className) {
-        // $(document).on('click', className, function(event) {
-            // event.preventDefault();
-            $('.main-container').append(`<div class='exchangeList'></div>`);
-            console.log($(this).attr('val'));
-            $('html, body').animate({
-            	scrollTop: $(".exchangeList").offset().top
-            }, 2000);
-            $('.exchangeList').css('height','100vh');
-
-            renderExchangeList(className);
-        // })
-    }
-
-    // function submitCoin() {
-    //     $('.search-term').val('');
-    //     $(document).on('click', '.search-button', function(event) {
-    //         event.preventDefault();
-    //         $('.main-container').append(`<div class='exchangeList'></div>`);
-    //         console.log($('.search-term').val().toUpperCase());
-    //         $('html, body').animate({
-    //         	scrollTop: $(".exchangeList").offset().top
-    //         }, 2000);
-    //         $('.exchangeList').css('height','1000px');
-    //         renderExchangeList($('.search-term').val().toUpperCase());
-            
-    //         })
+        console.log($(this).attr('val'));
+        $('.search-button').val('');
+        $('html, body').animate({
+            scrollTop: $(".exchangeList").offset().top
+        }, 2000);
         
-    // }
+
+        renderExchangeList(className);
+
+    }
 
 
 
 
     getCoinMarkCapApi();
-    $(document).on('click', '.coin, .search-button', function(event){
-    	event.preventDefault();
-    	let searching = $('.search-term').val().toUpperCase();
-    	$('.search-button').attr('val',searching);
-   		clickCoin($(this).attr('val'));
-   	});
-    // submitCoin();
+    $(document).on('click', '.coin, .search-button', function(event) {
+        event.preventDefault();
+        let searching = $('.search-term').val().toUpperCase();
+        $('.search-button').attr('val', searching);
+        clickCoin($(this).attr('val'));
 
-//loading over and over again
-//scroll back up
-//prices with the names
-//search button more prominent
-//filter out zero results
+    });
+
+
+
+    //git push origin master
+
+
+    //loading over and over again - done
+    //scroll back up
+    //prices with the names
+    //search button more prominent
+    //filter out zero results
 
 });

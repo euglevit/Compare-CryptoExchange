@@ -1,3 +1,37 @@
+.search-term{
+  	box-sizing: content-box;
+    height: 60px;
+    padding: 0 46px 0 10px;
+    border-color: #888;
+    border-radius: 35px;
+    border-style: solid;
+    border-width: 5px;
+    margin-top: 15px;
+    color: #333;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 26px;
+    width:90%;
+}
+.search-button {
+	background: #0066A2;
+
+	color: white;
+
+	border-style: outset;
+
+	border-color: #0066A2;
+
+	height: 50px;
+
+	width: 100px;
+
+	font: bold 15px arial, sans-serif;
+
+	text-shadow:none;
+
+}
+}
+
 .coin {
 	background-color: #44c767;
 	border-radius: 28px;
@@ -38,7 +72,6 @@
 .exchangeList{
 	width: 90%;
 	margin: auto;
-	height: 100vh;
 }
 
 .exchangeItem {
