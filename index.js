@@ -1,7 +1,6 @@
 $(document).ready(function() {
 
     let aUrl = 'https://min-api.cryptocompare.com/data/price';
-    let cUrl = 'https://www.cryptocompare.com/api/data/coinlist';
     let bUrl = 'https://min-api.cryptocompare.com/data/all/exchanges';
 
 
@@ -44,9 +43,9 @@ $(document).ready(function() {
         })
     }
 
-    function clickCoin() {
-        $(document).on('click', '.coin', function(event) {
-            event.preventDefault();
+    function clickCoin(className) {
+        // $(document).on('click', className, function(event) {
+            // event.preventDefault();
             $('.main-container').append(`<div class='exchangeList'></div>`);
             console.log($(this).attr('val'));
             $('html, body').animate({
@@ -54,32 +53,42 @@ $(document).ready(function() {
             }, 2000);
             $('.exchangeList').css('height','100vh');
 
-            renderExchangeList($(this).attr('val'));
-        })
+            renderExchangeList(className);
+        // })
     }
 
-    function submitCoin() {
-        $('.search-term').val('');
-        $(document).on('click', '.search-button', function(event) {
-            event.preventDefault();
-            $('body').append(`<div class='exchangeList'></div>`);
-            console.log($('.search-term').val().toUpperCase());
-            $('html, body').animate({
-            	scrollTop: $(".exchangeList").offset().top
-            }, 2000);
-            $('.exchangeList').css('height','1000px');
-            renderExchangeList($('.search-term').val().toUpperCase());
+    // function submitCoin() {
+    //     $('.search-term').val('');
+    //     $(document).on('click', '.search-button', function(event) {
+    //         event.preventDefault();
+    //         $('.main-container').append(`<div class='exchangeList'></div>`);
+    //         console.log($('.search-term').val().toUpperCase());
+    //         $('html, body').animate({
+    //         	scrollTop: $(".exchangeList").offset().top
+    //         }, 2000);
+    //         $('.exchangeList').css('height','1000px');
+    //         renderExchangeList($('.search-term').val().toUpperCase());
             
-            })
+    //         })
         
-    }
+    // }
 
 
 
 
     getCoinMarkCapApi();
-    clickCoin();
-    submitCoin();
+    $(document).on('click', '.coin, .search-button', function(event){
+    	event.preventDefault();
+    	let searching = $('.search-term').val().toUpperCase();
+    	$('.search-button').attr('val',searching);
+   		clickCoin($(this).attr('val'));
+   	});
+    // submitCoin();
 
+//loading over and over again
+//scroll back up
+//prices with the names
+//search button more prominent
+//filter out zero results
 
 });
