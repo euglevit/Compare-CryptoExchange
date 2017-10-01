@@ -6,13 +6,6 @@ $(document).ready(function() {
     let dUrl = 'https://min-api.cryptocompare.com/data/all/exchanges';
 
 
-
-
-
-    function getExchangeApi() {
-        $.getJSON(dUrl, renderExchangeList);
-    }
-
     function getCoinMarkCapApi() {
         $.ajax({
             type: 'GET',
@@ -26,20 +19,12 @@ $(document).ready(function() {
             $('.cryptoList').append(`
     				<li class='cryptoCoin'><button class='coin' val=${name.symbol}>${name.id}</button></li>
 			`)
-        )
-    };
-
-    function getData(data) {
-        console.log(Date(data.Data[0].time));
-        console.log(data.Data[0].close);
-    }
-
-    function getCoins(data) {
-        console.log(data[1].id);
+        );
     }
 
     function renderExchangeList(coinChoice) {
-    	$('.exchangeList').html('');
+        $('.exchangeList').html('');
+        let total=[];
         console.log(coinChoice);
         $.getJSON(dUrl, function(data) {
             let data2 = Object.values(data);
@@ -48,20 +33,20 @@ $(document).ready(function() {
                 if (coinChoice in data2[i]) {
                     $.getJSON(aUrl, { fsym: coinChoice, tsyms: 'USD', e: data3[i] }, function(info) {
                         if (info.USD != undefined) {
+                        	total.push(coinChoice);
                             $('.exchangeList').append(`
 						<li class=exchangeItem'>${data3[i]}</li>
 						<li class="dollars">${info.USD}</li>
 						`)
                         } else(console.log('did not work'))
                     });
-                }
+                };
             };
+            
         })
 
+
     }
-
-
-
 
     function clickCoin() {
         $(document).on('click', '.coin', function(event) {
@@ -71,37 +56,19 @@ $(document).ready(function() {
         })
     }
 
+    function submitCoin() {
+        $('.search-term').val('');
+        $(document).on('click', '.search-button', function(event) {
+            event.preventDefault();
+            console.log($('.search-term').val().toUpperCase());
+            renderExchangeList($('.search-term').val().toUpperCase());
+        })
+    }
 
-    // getCrypCompApi();
+
     getCoinMarkCapApi();
     clickCoin();
+    submitCoin();
 
 
 });
-
-
-// renderCoinList();
-
-//https://min-api.cryptocompare.com/data/all/exchanges
-
-// let aUrl = 'https://min-api.cryptocompare.com/data/histominute';
-// let searchTerm= {
-// 	fsym: 'ETH',
-// 	tsyms: 'BTC'
-
-// }
-
-// function setup() {
-// 	let query = {
-// 		url:'https://min-api.cryptocompare.com/data/histominute',
-// 		fsym: 'BTC',
-// 		tsym: 'USD'
-// 	}
-// 	$.getJSON(aUrl,query,getData);
-
-// 	};
-
-
-// function getData(data) {
-// 	console.log(data.Data[0]);
-// }
