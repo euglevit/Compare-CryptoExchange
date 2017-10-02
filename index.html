@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title>Crypto</title>
-	<link rel="stylesheet" type="text/css" href="index.css">
-
+    <title>Crypto</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
-<body>
-	<div class='main-container'>
-		<form>
-			<input class='search-term' type='text' placeholder="Type in your favorite CryptoCoins (e.g BTC,ETH)">
-			<button class='search-button'>Search Coin</button>
-		</form>
-		<div class='cryptoList'>
-	</div>
-	<div class='exchangeList'></div>
-	</div>
-	<script src="https://code.jquery.com/jquery.min.js"></script>
-	<script type="text/javascript" src="index.js"></script>
-</body>
-</html>
 
+<body>
+  <div class='main-container'>
+     <div class='first-page-container panel' data-color='yellow'>
+         <form class='search-form'>
+             <input class='search-term' type='text' placeholder="Type in your favorite CryptoCoins (e.g BTC,ETH)">
+             <button class='search-button'>Search Coin</button>
+         </form>
+         <div class='cryptoList'></div>
+     </div>
+     <div class='second-page-container panel' data-color='orange'>
+         <div class='exchangeList'></div>
+     </div>
+  </div>
+  <script src="https://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+</body>
+
+</html>
