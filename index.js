@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    let aUrl = 'https://min-api.cryptocompare.com/data/price';
+    let aUrl = 'https://min-api.cryptocompare.com/data/histoday';
     let bUrl = 'https://min-api.cryptocompare.com/data/all/exchanges';
     let saveStatus = '';
     let newStatus = 0;
@@ -16,12 +16,15 @@ $(document).ready(function() {
 
     function nextLoop(num,data){
         $('.cryptoList').html('');
+        $('.cryptoList').animate({left: '15%'}, 1000);
         newStatus = parseInt(newStatus);
-    	console.log(newStatus+4);
-    	for(let i=newStatus+1;i < newStatus+5; i++){
-            console.log(newStatus+5);
+    	console.log(newStatus+3);
+    	for(let i=newStatus+1;i < newStatus+4; i++){
+            console.log(newStatus+4);
             $('.cryptoList').append(`
-    				<button class='cryptoCoin coin' val=${data[i].symbol}>${data[i].id}(${data[i].symbol})</button>
+    				<button class='cryptoCoin coin' val=${allCoins[i].symbol}>
+                    1 ${allCoins[i].name} (${allCoins[i].symbol})</br>
+                    ${allCoins[i].price_usd} US Dollars</button>
 			`);
             saveStatus = data[i].symbol;
             
@@ -34,16 +37,26 @@ $(document).ready(function() {
 
     $(document).on('click','.next-button',function(){
             console.log(saveStatus);
-            nextLoop(newStatus,allCoins);
+            $('.cryptoList').animate({left: '300vh'}, 1000);
+
+            setTimeout(function(){nextLoop(newStatus,allCoins)},1000);
 
         });
 
     function renderCoinList(data) {
     	allCoins = data;
+        let byTime = allCoins.slice(0)
+        byTime.sort(function(a,b){return a.last_updated-b.last_updated});
         console.log(data);
-        for(let i=0;i < 4; i++){
+        for(let i=0;i < 3; i++){
+            let date = new Date(allCoins[i].last_updated);
+            let components = Date(allCoins[i].last_updated).split(' ').slice(1, 4);
+            components[1].replace(/^0/, '');
             $('.cryptoList').append(`
-    				<button class='cryptoCoin coin' val=${allCoins[i].symbol}>${allCoins[i].id} (${allCoins[i].symbol})</button>
+    				<button class='cryptoCoin coin' val=${allCoins[i].symbol}>
+                    1 ${allCoins[i].name} (${allCoins[i].symbol})</br>
+                    =</br>
+                    $${allCoins[i].price_usd} US Dollars</button>
 			`);
             saveStatus = allCoins[i].symbol;
 
@@ -71,11 +84,11 @@ $(document).ready(function() {
             let data3 = Object.keys(data);
             for (let i = 0; i < data2.length; i++) {
                 if (coinChoice in data2[i]) {
-                    $.getJSON(aUrl, { fsym: coinChoice, tsyms: 'USD', e: data3[i] }, function(info) {
-                        if (info.USD != undefined) {
+                    $.getJSON(aUrl, { fsym: coinChoice, tsym: 'USD', e: data3[i] }, function(info) {
+                        if (info.Data[i].close != undefined) {
                             total.push(coinChoice);
                             $('.exchangeList').append(`
-						<button class='exchangeItem' href='https://www.${data3[i]}.com'>${data3[i]} : $${info.USD}</button>
+						<button class='exchangeItem' href='https://www.${data3[i]}.com'>${data3[i]} : $${info.Data[i].close}</button>
 						`)
                         } else(console.log('did not work'))
                     });
