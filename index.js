@@ -2,23 +2,61 @@ $(document).ready(function() {
 
     let aUrl = 'https://min-api.cryptocompare.com/data/price';
     let bUrl = 'https://min-api.cryptocompare.com/data/all/exchanges';
-
+    let saveStatus = '';
+    let newStatus = 0;
+    let allCoins = '';
 
     function getCoinMarkCapApi() {
-        $.ajax({
-            type: 'GET',
-            url: 'https://api.coinmarketcap.com/v1/ticker/?limit=4'
-        }).done(renderCoinList);
+
+      $.ajax({
+         type: 'GET',
+         url: 'https://api.coinmarketcap.com/v1/ticker/?limit=1000'
+      }).done(renderCoinList);
     }
 
-    function renderCoinList(data) {
-        console.log(data);
-        data.forEach(name =>
+    function nextLoop(num,data){
+        $('.cryptoList').html('');
+        newStatus = parseInt(newStatus);
+    	console.log(newStatus+4);
+    	for(let i=newStatus+1;i < newStatus+5; i++){
+            console.log(newStatus+5);
             $('.cryptoList').append(`
-    				<button class='cryptoCoin coin' val=${name.symbol}>${name.id} (${name.symbol})</button>
-			`)
-        );
+    				<button class='cryptoCoin coin' val=${data[i].symbol}>${data[i].id}(${data[i].symbol})</button>
+			`);
+            saveStatus = data[i].symbol;
+            
+        }
+        $('.cryptoList').append(`
+            <button class='next-button'>Next Button</button>`);
+        newStatus = Object.keys(data).find(key => data[key].symbol === saveStatus);
+        console.log(newStatus);
     }
+
+    $(document).on('click','.next-button',function(){
+            console.log(saveStatus);
+            nextLoop(newStatus,allCoins);
+
+        });
+
+    function renderCoinList(data) {
+    	allCoins = data;
+        console.log(data);
+        for(let i=0;i < 4; i++){
+            $('.cryptoList').append(`
+    				<button class='cryptoCoin coin' val=${allCoins[i].symbol}>${allCoins[i].id} (${allCoins[i].symbol})</button>
+			`);
+            saveStatus = allCoins[i].symbol;
+
+
+        }
+        newStatus = Object.keys(allCoins).find(key => allCoins[key].symbol === saveStatus);
+        $('.cryptoList').append(`
+        	<button class='next-button'>Next Button</button>`);
+        
+      }
+        
+
+    
 
     function renderExchangeList(coinChoice) {
         $('.exchangeList').html('');
@@ -105,9 +143,15 @@ $(document).ready(function() {
   
 }).scroll();
 
- function moreCoins(){
- 	
- }
+ // function moreCoins(){
+
+ // 	$(document).on('click', '.next-button' function(event){
+ // 		event.preventDefault();
+ // 		getCoinMarkCapApi()
+
+ // 	})
+
+ // }
 
 
 
