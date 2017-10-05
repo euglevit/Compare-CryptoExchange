@@ -54,7 +54,8 @@ body {
     transform: rotate(-45deg);
     background-color: white;
     position: relative;
-    left: 42%;
+    left: 370px;
+    top: -48px;
 }
 
 .next-button:hover{
@@ -219,6 +220,7 @@ body {
     position: absolute;
     /* left: 15%; */
     text-align: center;
+    min-width: 710px;
 }
 
 .exchangeList{
