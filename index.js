@@ -15,31 +15,48 @@ $(document).ready(function() {
     }
 
     function nextLoop(num,data){
+        
         $('.cryptoList').html('');
-        $('.cryptoList').animate({left: '15%'}, 1000);
         newStatus = parseInt(newStatus);
     	console.log(newStatus+3);
     	for(let i=newStatus+1;i < newStatus+4; i++){
             console.log(newStatus+4);
-            $('.cryptoList').append(`
-    				<button class='cryptoCoin coin' val=${allCoins[i].symbol}>
-                    1 ${allCoins[i].name} (${allCoins[i].symbol})</br>
-                    ${allCoins[i].price_usd} US Dollars</button>
-			`);
+            if(isNaN(parseInt(allCoins[i].percent_change_7d))){
+                newStatus++;
+            }
+            else if(parseInt(allCoins[i].percent_change_7d) <= 0){
+                $('.cryptoList').append(`
+                        <button class='cryptoCoin coin' val=${allCoins[i].symbol}><span class='stock-name'>
+                        ${allCoins[i].name}<span class='stock-symbol'>(${allCoins[i].symbol})</span></span> <span class='stock-price'>$${allCoins[i].price_usd}<span class='color-red stock-percent'>&#9660 ${allCoins[i].percent_change_7d}</span></span></button>
+                `);
+            }else if(parseInt(allCoins[i].percent_change_7d) >= 0){
+                $('.cryptoList').append(`
+                        <button class='cryptoCoin coin' val=${allCoins[i].symbol}><span class='stock-name'>
+                        ${allCoins[i].name}<span class='stock-symbol'>(${allCoins[i].symbol})</span></span> <span class='stock-price'>$${allCoins[i].price_usd}<span class='color-green stock-percent'>&#9650 ${allCoins[i].percent_change_7d}</span></span></button>
+                `);
+            }
             saveStatus = data[i].symbol;
             
         }
+
+
         $('.cryptoList').append(`
-            <button class='next-button'>Next Button</button>`);
+            <div class='next-prev'>
+            <button class='next-button'>Next Button</button>
+            </div>
+            `);
+
         newStatus = Object.keys(data).find(key => data[key].symbol === saveStatus);
         console.log(newStatus);
     }
 
+
     $(document).on('click','.next-button',function(){
             console.log(saveStatus);
-            $('.cryptoList').animate({left: '300vh'}, 1000);
-
-            setTimeout(function(){nextLoop(newStatus,allCoins)},1000);
+            $('.cryptoList').animate({left: '-300vh'}, 500);
+            setTimeout(function(){$('.cryptoList').css('left','300vh')},600);
+            setTimeout(function(){$('.cryptoList').animate({left: '15%'}, 1000)},700);
+            setTimeout(function(){nextLoop(newStatus,allCoins)},500);
 
         });
 
@@ -52,30 +69,68 @@ $(document).ready(function() {
             let date = new Date(allCoins[i].last_updated);
             let components = Date(allCoins[i].last_updated).split(' ').slice(1, 4);
             components[1].replace(/^0/, '');
-            $('.cryptoList').append(`
-    				<button class='cryptoCoin coin' val=${allCoins[i].symbol}>
-                    1 ${allCoins[i].name} (${allCoins[i].symbol})</br>
-                    =</br>
-                    $${allCoins[i].price_usd} US Dollars</button>
-			`);
+            if(parseInt(allCoins[i].percent_change_7d) < 0){
+                $('.cryptoList').append(`
+        				<button class='cryptoCoin coin' val=${allCoins[i].symbol}><span class='stock-name'>
+                        ${allCoins[i].name}<span class='stock-symbol'>(${allCoins[i].symbol})</span></span> <span class='stock-price'>$${allCoins[i].price_usd}<span class='color-red stock-percent'>&#9660 ${allCoins[i].percent_change_7d}</span></span></button>
+    			`);
+            }else if(parseInt(allCoins[i].percent_change_7d) > 0){
+                $('.cryptoList').append(`
+                        <button class='cryptoCoin coin' val=${allCoins[i].symbol}><span class='stock-name'>
+                        ${allCoins[i].name}<span class='stock-symbol'>(${allCoins[i].symbol})</span></span> <span class='stock-price'>$${allCoins[i].price_usd}<span class='color-green stock-percent'>&#9650 ${allCoins[i].percent_change_7d}</span></span></button>
+                `);
+            }
+            
             saveStatus = allCoins[i].symbol;
 
 
         }
         newStatus = Object.keys(allCoins).find(key => allCoins[key].symbol === saveStatus);
         $('.cryptoList').append(`
-        	<button class='next-button'>Next Button</button>`);
+        	<div><button class='next-button'>Next Button</button></div>`);
         
       }
         
 
     
 
+    // function renderExchangeList(coinChoice) {
+    //     $('.exchangeList').html('');
+    //     $('.exchangeList').css('height', '100vh');
+    //     $('.second-page-container').css('height', '100vh');
+    //     $('.exchangeList').html(`<span class='coin-choice-button'>Coin Name: ${coinChoice}</span>`);
+
+    //     let total = [];
+    //     console.log(coinChoice);
+    //     $.getJSON(bUrl, function(data) {
+    //         let data2 = Object.values(data);
+    //         let data3 = Object.keys(data);
+    //         for (let i = 0; i < data2.length; i++) {
+    //             if (coinChoice in data2[i]) {
+    //                 $.getJSON(aUrl, { fsym: coinChoice, tsym: 'USD', e: data3[i] }, function(info) {
+    //                     if (info.Data[i].close != undefined) {
+    //                         total.push(coinChoice);
+    //                         $('.exchangeList').append(`
+				// 		<button class='exchangeItem' href='https://www.${data3[i]}.com'>${data3[i]} : $${info.Data[i].close}</button>
+				// 		`)
+    //                     } else(console.log('did not work'))
+    //                 });
+    //             };
+    //         };
+    //         console.log('beforebutton');
+    //         $('.exchangeList').append(`<button class='startOver'>Start Over</button>`);
+    //         console.log($('.startOver').val());
+    //         console.log('afterbutton');
+
+    //     })
+    // }
+
     function renderExchangeList(coinChoice) {
         $('.exchangeList').html('');
         $('.exchangeList').css('height', '100vh');
         $('.second-page-container').css('height', '100vh');
         $('.exchangeList').html(`<span class='coin-choice-button'>Coin Name: ${coinChoice}</span>`);
+        $('.exchangeList').append(`<div class='table'><div class='row'></div></div>`);
 
         let total = [];
         console.log(coinChoice);
@@ -87,9 +142,10 @@ $(document).ready(function() {
                     $.getJSON(aUrl, { fsym: coinChoice, tsym: 'USD', e: data3[i] }, function(info) {
                         if (info.Data[i].close != undefined) {
                             total.push(coinChoice);
-                            $('.exchangeList').append(`
-						<button class='exchangeItem' href='https://www.${data3[i]}.com'>${data3[i]} : $${info.Data[i].close}</button>
-						`)
+                            $('.row').append(`
+                                <div class="div-table-col" align="center">${data3[i]}</div>
+                                
+                        `)
                         } else(console.log('did not work'))
                     });
                 };
@@ -126,35 +182,35 @@ $(document).ready(function() {
 
     }
 
- $(window).scroll(function() {
+//  $(window).scroll(function() {
   
-  // selectors
-  var $window = $(window),
-      $body = $('body'),
-      $panel = $('.panel');
+//   // selectors
+//   var $window = $(window),
+//       $body = $('body'),
+//       $panel = $('.panel');
   
-  // Change 33% earlier than scroll position so colour is there when you arrive.
-  var scroll = $window.scrollTop() + ($window.height() / 3);
+//   // Change 33% earlier than scroll position so colour is there when you arrive.
+//   var scroll = $window.scrollTop() + ($window.height() / 3);
  
-  $panel.each(function () {
-    var $this = $(this);
+//   $panel.each(function () {
+//     var $this = $(this);
     
-    // if position is within range of this panel.
-    // So position of (position of top of div <= scroll position) && (position of bottom of div > scroll position).
-    // Remember we set the scroll to 33% earlier in scroll var.
-    if ($this.position().top <= scroll && $this.position().top + $this.height() > scroll) {
+//     // if position is within range of this panel.
+//     // So position of (position of top of div <= scroll position) && (position of bottom of div > scroll position).
+//     // Remember we set the scroll to 33% earlier in scroll var.
+//     if ($this.position().top <= scroll && $this.position().top + $this.height() > scroll) {
           
-      // Remove all classes on body with color-
-      $body.removeClass(function (index, css) {
-        return (css.match (/(^|\s)color-\S+/g) || []).join(' ');
-      });
+//       // Remove all classes on body with color-
+//       $body.removeClass(function (index, css) {
+//         return (css.match (/(^|\s)color-\S+/g) || []).join(' ');
+//       });
        
-      // Add class of currently active div
-      $body.addClass('color-' + $(this).data('color'));
-    }
-  });    
+//       // Add class of currently active div
+//       $body.addClass('color-' + $(this).data('color'));
+//     }
+//   });    
   
-}).scroll();
+// }).scroll();
 
  // function moreCoins(){
 
