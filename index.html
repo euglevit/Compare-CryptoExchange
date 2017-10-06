@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang='en'>
 
 <head>
     <title>CryptoCheap</title>
@@ -8,17 +8,17 @@
 
 <body>
   <div class='main-container'>
-     <div class='first-page-container panel' data-color='yellow'>
-     		<img class='logo' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwvzmPg6PnRwbwSjy6kjnqCG01WAQrQTubhv5-z9Yi6cLPrB-DiQ" alt='logo'>
-         <form class='search-form'>
-             <input class='search-term' type='text' placeholder="Type in the symbol for your favorite CryptoCoin(e.g BTC,ETH) to get the price in different Exchanges">
+     <section class='first-page-container panel' role='region'>
+     		<img role='img' class='logo' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwvzmPg6PnRwbwSjy6kjnqCG01WAQrQTubhv5-z9Yi6cLPrB-DiQ" alt='logo'>
+         <form id='nec' role='form' class='search-form'>
+             <input class='search-term' aria-label='nec' type='text' placeholder='Type in the symbol for your favorite CryptoCoin(e.g BTC,ETH) to get the price in different Exchanges'>
              <button class='search-button'>Search Coin</button>
          </form>
          <div class='cryptoList'></div>
-     </div>
-     <div class='second-page-container panel' data-color='orange'>
+     </section>
+     <section role='region' class='second-page-container panel' data-color='orange'>
          <div class='exchangeList'></div>
-     </div>
+     </section>
   </div>
   <script src="https://code.jquery.com/jquery.min.js"></script>
   <script type="text/javascript" src="index.js"></script>

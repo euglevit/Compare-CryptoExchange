@@ -7,21 +7,20 @@ $(document).ready(function() {
 		let newStatus = 0;
 		let allCoins = '';
 
+		//connects the the coinmarketcap API and returns the renderCoinList function
 		function getCoinMarkCapApi() {
-
 				$.ajax({
 						type: 'GET',
 						url: 'https://api.coinmarketcap.com/v1/ticker/?limit=1000'
 				}).done(renderCoinList);
 		}
 
+		//lets another group of buttons load onto the page
 		function nextLoop(num, data) {
 
 				$('.cryptoList').html('');
 				newStatus = parseInt(newStatus);
-				console.log(newStatus + 3);
 				for (let i = newStatus + 1; i < newStatus + 4; i++) {
-						console.log(newStatus + 4);
 						if (isNaN(parseInt(allCoins[i].percent_change_7d))) {
 								newStatus++;
 						} else if (parseInt(allCoins[i].percent_change_7d) <= 0) {
@@ -53,12 +52,10 @@ $(document).ready(function() {
 				);
 
 				newStatus = Object.keys(data).find(key => data[key].symbol === saveStatus);
-				console.log(newStatus);
 		}
 
-
+		//when the user hits the next arrow, another group of coins comes onto the page by activating the nextLoop function
 		$(document).on('click', '.next-button', function() {
-				console.log(saveStatus);
 				$('.cryptoList').animate({
 						left: '-300vh'
 				}, 500);
@@ -76,17 +73,10 @@ $(document).ready(function() {
 
 		});
 
+		//Renders a list of all coins to the DOM, as well as the next button.
 		function renderCoinList(data) {
 				allCoins = data;
-				let byTime = allCoins.slice(0);
-				byTime.sort(function(a, b) {
-						return a.last_updated - b.last_updated
-				});
-				console.log(data);
 				for (let i = 0; i < 3; i++) {
-						let date = new Date(allCoins[i].last_updated);
-						let components = Date(allCoins[i].last_updated).split(' ').slice(1, 4);
-						components[1].replace(/^0/, '');
 						if (parseInt(allCoins[i].percent_change_7d) < 0) {
 								$('.cryptoList').append(
 										`
@@ -102,32 +92,31 @@ $(document).ready(function() {
 								`
 								);
 						}
-
 						saveStatus = allCoins[i].symbol;
-
-
 				}
 				newStatus = Object.keys(allCoins).find(key => allCoins[key].symbol ===
 						saveStatus);
 				$('.cryptoList').append(
 						`
-						<div><button class='next-button'></button></div>`);
+						<div><button class='next-button' role='presentation'></button></div>`);
 
 		}
 
+		//creates the table for the Exchange List
 		function renderExchangeList(coinChoice) {
 				$('.exchangeList').html('');
 				$('.exchangeList').css('height', '100vh');
 				$('.second-page-container').css('height', '100vh');
 				$('.exchangeList').html(
-						`<div class='table-name'><h1 class='coin-choice-button'>${coinChoice}</h1><button class='startOver'></button></div>`
+						`<div class='table-name'><h1 role='presentation' class='coin-choice-button'>${coinChoice}</h1><button class='startOver'></button></div>`
 				);
 				$('.exchangeList').append(
 						`<div class='table'><div class='row exchanges-list'><span class='underline'>Exchange Name</span></div><div class='row usd-list'><span class='underline'>Price</span></div><div class='row usd7-list'><span class='underline'>Price(7 Days Ago)</span></div><div class='row high-list'><span class='underline'>High</span></div><div class='row low-list'><span class='underline'>Low</span></div></div>`
 				);
+			}
 
-				let total = [];
-				console.log(coinChoice);
+			//renders the info that is in the Exchange List by connecting to the Crypto Compare API
+			function renderHTMLExchangeList(coinChoice){
 				$.getJSON(bUrl, function(data) {
 						let data2 = Object.values(data);
 						let data3 = Object.keys(data);
@@ -138,9 +127,12 @@ $(document).ready(function() {
 												tsym: 'USD',
 												e: data3[i]
 										}, function(info) {
-												if (info.Data[i].close != undefined && parseInt(info.Data[i].volumefrom) !=
+											if (info.Data[i] === undefined){
+												console.log('no market');
+											}
+												else if (parseInt(info.Data[i].volumefrom) !=
 														0) {
-														total.push(coinChoice);
+									
 														$('.exchanges-list').append(
 																`
 																<div class="col" align="center"><a class='links' href='https://www.${data3[i]}.com'>${data3[i]}</a></div>
@@ -171,17 +163,16 @@ $(document).ready(function() {
 																
 												`
 														);
-												} else(console.log('did not work'))
+												} else{
+													console.log('not in exchange');
+												}
 										});
 								};
 						};
-						console.log('beforebutton');
-						console.log($('.startOver').val());
-						console.log('afterbutton');
-
 				})
 		}
 
+		//closes the second-page-container and opens the first-page-container up again
 		function startOver() {
 				$(document).on('click', '.startOver', function(event) {
 						event.preventDefault();
@@ -199,8 +190,8 @@ $(document).ready(function() {
 				})
 		}
 
-		function clickCoin(className) {
-				console.log($(this).attr('val'));
+		//the body of the page will scroll down until it hits the second-page-cointainer class. The first-page-container class will hide, and the renderExchangeList function and renderHTMLExchangeList function will activate
+		function clickCoin(coinChoice) {
 				$('.search-button').val('');
 				$('html, body').animate({
 						scrollTop: $(".second-page-container").offset().top
@@ -210,7 +201,8 @@ $(document).ready(function() {
 				}, 2100);
 
 
-				renderExchangeList(className);
+				renderExchangeList(coinChoice);
+				renderHTMLExchangeList(coinChoice);
 
 		}
 
@@ -220,6 +212,7 @@ $(document).ready(function() {
 		getCoinMarkCapApi();
 		startOver();
 
+		//If the user hit's one of the coin buttons or the search button, the clickCoin function will activate with the parameter = to that coin.
 		$(document).on('click', '.cryptoCoin, .search-button', function(event) {
 				event.preventDefault();
 				let searching = $('.search-term').val().toUpperCase();
@@ -232,11 +225,5 @@ $(document).ready(function() {
 
 		//git push origin master
 
-
-		//loading over and over again - done
-		//scroll back up - done need styling
-		//prices with the names
-		//search button more prominent
-		//filter out zero results
 
 });
