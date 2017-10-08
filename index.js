@@ -51,11 +51,15 @@ $(document).ready(function() {
 						`
 				);
 
+				
+				$('.cryptoList').css('width');
+
 				newStatus = Object.keys(data).find(key => data[key].symbol === saveStatus);
 		}
 
 		//when the user hits the next arrow, another group of coins comes onto the page by activating the nextLoop function
 		$(document).on('click', '.next-button', function() {
+			let leftValue = $('.cryptoList').css('left');
 				$('.cryptoList').animate({
 						left: '-300vh'
 				}, 500);
@@ -64,12 +68,16 @@ $(document).ready(function() {
 				}, 600);
 				setTimeout(function() {
 						$('.cryptoList').animate({
-								left: '0%'
+								left: leftValue
 						}, 500)
 				}, 700);
 				setTimeout(function() {
 						nextLoop(newStatus, allCoins)
 				}, 500);
+			setTimeout(function(){
+				$('.cryptoList').css('left','');
+			}, 1400);
+				// $('.cryptoList').attr('width','800px');
 
 		});
 
@@ -220,6 +228,27 @@ $(document).ready(function() {
 				clickCoin($(this).attr('val'));
 
 		});
+
+
+		//changes placeholder text depending on Window Size
+		$(window).resize(function(){
+			let cutoff = 653,
+        	placeholderShort = "Search Coins by symbol(BTC,ETH)",
+        	placeholderLong = "Type in the symbol for your favorite CryptoCoin(e.g BTC,ETH) to prices";
+    
+    		if($(window).width() >= cutoff) {
+		      $('.search-term').attr('placeholder', placeholderLong); 
+		    }
+		    else {
+		      $('.search-term').attr('placeholder', placeholderShort); 
+		    } 
+		});
+
+		if ($(window).width() < 667 ) {
+			$(".search-term").attr("placeholder","Search Coins by symbol(BTC,ETH)");
+		}else { 
+			$(".search-term").attr("placeholder","Type in the symbol for your favorite CryptoCoin(e.g BTC,ETH) to prices");
+		}
 
 
 
