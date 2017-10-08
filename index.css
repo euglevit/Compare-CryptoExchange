@@ -57,18 +57,26 @@ body {
         margin: auto;
     }
     .cryptoCoin{
-        width: 345px !important;
+        width: 600px !important;
         margin-top: 34px !important;
         display: block !important;
         margin-left: auto;
         margin-right: auto;
-        font-size: 22px !important;
+        font-size: 28px !important;
+        height: 157px;
     }
     .search-form{
-        top: 667px !important;
+        top: 833px !important;
     }
     .search-term{
+        height: 120px !important;
+        font-size: 38px !important;
 
+    }
+    .search-button{
+        height: 100px !important;
+        width: 180px !important;
+        font-size: 26px !important;
     }
     .next-button {
         left: 183px !important;
