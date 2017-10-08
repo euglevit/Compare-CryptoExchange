@@ -21,3 +21,7 @@ This website lets a user type in the name of a Crypto Coin, and the results disp
 
 (HTML/CSS/Javascript/jQuery)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 60854c0aafc75b46822f610d0ce1b3f794d0228c
