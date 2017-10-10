@@ -130,6 +130,9 @@ body {
     .low-list {
         background-color: white;
     }
+    .exchange-table{
+        
+    }
     .exchange1{
 
     }
@@ -148,17 +151,13 @@ body {
     .low1{
 
     }
-    .each{
-
-    }
-    .exchange-table{
-
-    }
-.exchange1:before { content: "Exchange"; }
-.usd1:before { content: "USD"; }
-.sevendays:before { content: "1 Week Ago"; }
-.high1:before { content: "High"; }
-.low1:before { content: "Low";}
+    .each{float: none !important;margin-bottom: -400px;width: 100% !important;text-align: right !important;}
+    .exchange-table{height: 500px !important;font-size: 42px;/* text-align: right !important; */}
+.exchange1:before {content: "Exchange: ";position: absolute;left: 155px;}
+.usd1:before { content: "USD: ";position: absolute;left: 155px; }
+.sevendays:before { content: "1 Week Ago: ";position: absolute;left: 155px; }
+.high1:before { content: "High: ";position: absolute;left: 155px; }
+.low1:before { content: "Low: ";position: absolute;left: 155px;}
 
 }
 
@@ -448,15 +447,16 @@ body {
     display: inline
 }
 .each{
-    width:20%;
+    width: 20%;
     float: left;
     /* padding: 0px; */
     /* border-left: 5px solid white; */
     height: 100%;
-    text-align: left;
+    /* text-align: -webkit-auto; */
     /* padding-top: 5px; */
     box-sizing: border-box;
     border-left: 2px solid white;
+    text-align: left;
 }
 
 
