@@ -116,11 +116,22 @@ $(document).ready(function() {
 				$('.exchangeList').css('height', '100vh');
 				$('.second-page-container').css('height', '100vh');
 				$('.exchangeList').html(
-						`<div class='table-name'><h1 role='presentation' class='coin-choice-button'>${coinChoice}</h1><button class='startOver'></button></div>`
+						`<div class='table-name'><h1 role='presentation' class='coin-choice-button'>${coinChoice}</h1><button class='startOver'></button></div><div class="exchange-container"></div>`
 				);
-				$('.exchangeList').append(
-						`<div class='table'><div class='row exchanges-list'><span class='underline'>Exchange Name</span></div><div class='row usd-list'><span class='underline'>Price</span></div><div class='row usd7-list'><span class='underline'>Price(7 Days Ago)</span></div><div class='row high-list'><span class='underline'>High</span></div><div class='row low-list'><span class='underline'>Low</span></div></div>`
-				);
+				$('.exchange-container').append(
+					`
+					<div class='each header'>Exchange</div>
+					<div class='each header'>Price</div>
+					<div class='each header'>Price(1 Week Prior)</div>
+					<div class='each header'>High</div>
+					<div class='each header'>Low</div>
+					`
+					);
+
+
+				// $('.exchangeList').append(
+				// 		`<div class='table'><div class='row exchanges-list'><span class='underline'>Exchange Name</span></div><div class='row usd-list'><span class='underline'>Price</span></div><div class='row usd7-list'><span class='underline'>Price(7 Days Ago)</span></div><div class='row high-list'><span class='underline'>High</span></div><div class='row low-list'><span class='underline'>Low</span></div></div>`
+				// );
 			}
 
 			//renders the info that is in the Exchange List by connecting to the Crypto Compare API
@@ -140,37 +151,51 @@ $(document).ready(function() {
 											}
 												else if (parseInt(info.Data[i].volumefrom) !=
 														0) {
+													$('.exchange-container').append(
+														`
+														<div class='exchange-table'>
+														<div class='each exchange1'><a class='''links' href='https://www.${data3[i]}.com'>${data3[i]}</a></div>
+														<div class="each usd1">$ ${info.Data[30].close}</div>
+														<div class="each sevendays">$ ${info.Data[23].close}</div>
+														<div class="each high1">$ ${info.Data[30].high}</div>
+														<div class="each low1">$ ${info.Data[30].low}</div>
+														</div>
+														`
+
+														);
+
+
 									
-														$('.exchanges-list').append(
-																`
-																<div class="col" align="center"><a class='links' href='https://www.${data3[i]}.com'>${data3[i]}</a></div>
+												// 		$('.exchanges-list').append(
+												// 				`
+												// 				<div class="col exchange1" align="center"><a class='links' href='https://www.${data3[i]}.com'>${data3[i]}</a></div>
 																
-												`
-														);
-														$('.usd-list').append(
-																`
-																<div class="col" align="center">$ ${info.Data[30].close}</div>
+												// `
+												// 		);
+												// 		$('.usd-list').append(
+												// 				`
+												// 				<div class="col usd1"  align="center">$ ${info.Data[30].close}</div>
 																
-												`
-														);
-														$('.usd7-list').append(
-																`
-																<div class="col" align="center">$ ${info.Data[23].close}</div>
+												// `
+												// 		);
+												// 		$('.usd7-list').append(
+												// 				`
+												// 				<div class="col sevendays" align="center">$ ${info.Data[23].close}</div>
 																
-												`
-														);
-														$('.high-list').append(
-																`
-																<div class="col" align="center">$ ${info.Data[30].high}</div>
+												// `
+												// 		);
+												// 		$('.high-list').append(
+												// 				`
+												// 				<div class="col high1" lign="center">$ ${info.Data[30].high}</div>
 																
-												`
-														);
-														$('.low-list').append(
-																`
-																<div class="col" align="center">$ ${info.Data[30].low}</div>
+												// `
+												// 		);
+												// 		$('.low-list').append(
+												// 				`
+												// 				<div class="col low1" align="center">$ ${info.Data[30].low}</div>
 																
-												`
-														);
+												// `
+												// 		);
 												} else{
 													console.log('not in exchange');
 												}
