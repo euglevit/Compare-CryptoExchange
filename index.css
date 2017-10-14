@@ -1,7 +1,8 @@
-.html{
+.html {
     box-sizing: border-box;
 }
-.startOver{
+
+.startOver {
     display: block;
     margin: auto;
     border: solid black;
@@ -12,16 +13,17 @@
     position: relative;
     vertical-align: middle;
 }
-.masthead{
+
+.masthead {
     background-image: url('https://images.pexels.com/photos/34204/pexels-photo.jpg?h=350&dpr=2&auto=compress&cs=tinysrgb');
     height: 100%;
-    min-height: 700px;
+    min-height: 110vh;
     background-position: center;
     background-size: cover;
     text-align: center;
     color: white;
-    /* background: linear-gradient(rgba(0, 0, 0, .7),rgba(0, 0, 0, .4)     ); */
 }
+
 .color-green {
     color: green;
 }
@@ -29,125 +31,162 @@
 .color-red {
     color: red;
 }
+
 .cryptoCoin {
     display: inline;
     float: left;
     height: 100%;
     width: 100%;
 }
+
 .cryptoCoin:hover {
     transform: scale(1.05, 1.05);
 }
+
 .cryptoList {
     height: 100%;
-    /* margin-left: auto; */
-    /* margin-right: auto; */
 }
+
 .coin-width {
     height: 100%;
     float: left;
-    /* margin-right: auto; */
     width: 33.333%;
-    /* margin-left: auto; */
 }
+
 .center {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
     height: 100%;
 }
-@media all and (max-width: 767px){
-    .header-content p{
-        /* font-size: 14px !important; */
+
+@media all and (max-width: 767px) {
+    .header-content p {
     }
-    .header-content h1{
+    .header-content h1 {
         font-size: 42px !important;
     }
     .search-term {
         width: 384px !important;
     }
 }
-@media all and (max-width: 718px){
-    .exchange-container{
+
+@media all and (max-width: 718px) {
+    .exchange-container {
         font-size: 14px;
     }
 }
 
-@media all and (max-width: 656px){
-    .exchange-container{
+@media all and (max-width: 656px) {
+    .exchange-container {
         font-size: 12px;
     }
-    .header-content h1{
+    .header-content h1 {
         font-size: 40px !important;
     }
 }
 
-@media all and (max-width: 540px){
-    .header-content h1{
+@media all and (max-width: 540px) {
+    .header-content h1 {
         font-size: 36px !important;
     }
     .search-term {
         width: 284px !important;
     }
-    .exchange-container{
-        
-    }
-
-    .exchange-table{
-        
-    }
-    .exchange1{
-
-    }
-    .header{
+    .header {
         display: none;
     }
-    .usd1{
-
+    .each {
+        float: none !important;
+        margin-bottom: -400px;
+        width: 98% !important;
+        text-align: right !important;
+        font-size: 22px;
     }
-    .sevendays{
-
+    .exchange-table {
+        height: 500px !important;
+        font-size: 42px;
     }
-    .high1{
-
+    .exchange1:before {
+        content: "Exchange: ";
+        position: absolute;
+        left: 55px;
+        font-size: 23px;
     }
-    .low1{
-
+    .usd1:before {
+        content: "USD: ";
+        position: absolute;
+        left: 55px;
     }
-    .each{float: none !important;margin-bottom: -400px;width: 100% !important;text-align: right !important;font-size: 25px;}
-    .exchange-table{height: 500px !important;font-size: 42px;}
-    .exchange1:before {content: "Exchange: ";position: absolute;left: 55px;font-size: 23px;/* text-align: -webkit-left; */}
-    .usd1:before {content: "USD: ";position: absolute;left: 55px;}
-    .sevendays:before {content: "1 Week Ago: ";position: absolute;left: 55px;}
-    .high1:before {content: "High: ";position: absolute;left: 55px;}
-    .low1:before {content: "Low: ";position: absolute;left: 55px;}
-    .exchange-table:hover .exchange1:before{left:0px;}
-    .exchange-table:hover .usd1:before{left:0px;}
-    .exchange-table:hover .sevendays:before{left:0px;}
-    .exchange-table:hover .high1:before{left:0px;}
-    .exchange-table:hover .low1:before{left:0px;}
-    .exchange1:hover::before {content: "Exchange: ";position: absolute;left: 0px;font-size: 23px;}
-    .usd1:before::hover {content: "USD: ";position: absolute;left: 0px;}
-    .sevendays:before::hover {content: "1 Week Ago: ";position: absolute;left: 0px;}
-    .high1:before::hover {content: "High: ";position: absolute;left: 0px;}
-    .low1:before::hover {content: "Low: ";position: absolute;left: 0px;}
-
+    .sevendays:before {
+        content: "1 Week Ago: ";
+        position: absolute;
+        left: 55px;
+    }
+    .high1:before {
+        content: "High: ";
+        position: absolute;
+        left: 55px;
+    }
+    .low1:before {
+        content: "Low: ";
+        position: absolute;
+        left: 55px;
+    }
+    .exchange-table:hover .exchange1:before {
+        left: 0px;
+    }
+    .exchange-table:hover .usd1:before {
+        left: 0px;
+    }
+    .exchange-table:hover .sevendays:before {
+        left: 0px;
+    }
+    .exchange-table:hover .high1:before {
+        left: 0px;
+    }
+    .exchange-table:hover .low1:before {
+        left: 0px;
+    }
+    .exchange1:hover::before {
+        content: "Exchange: ";
+        position: absolute;
+        left: 0px;
+        font-size: 23px;
+    }
+    .usd1:before::hover {
+        content: "USD: ";
+        position: absolute;
+        left: 0px;
+    }
+    .sevendays:before::hover {
+        content: "1 Week Ago: ";
+        position: absolute;
+        left: 0px;
+    }
+    .high1:before::hover {
+        content: "High: ";
+        position: absolute;
+        left: 0px;
+    }
+    .low1:before::hover {
+        content: "Low: ";
+        position: absolute;
+        left: 0px;
+    }
 }
 
 .header-content {
     position: absolute;
     top: 24%;
-    /* padding: 0 50px; */
-    /* transform: translateY(50%); */
     box-sizing: border-box;
     width: 100%;
-    /* max-width: 1000px; */
     margin-left: auto;
     margin-right: auto;
     min-width: 243px;
 }
 
-.header-content h1{
+.header-content h1 {
     font-size: 50px;
     font-weight: 700;
     margin-top: 0;
@@ -155,13 +194,13 @@
     text-transform: uppercase;
 }
 
-.header-content hr{
+.header-content hr {
     max-width: 50px;
     border-width: 3px;
     border-color: #f05f40
 }
 
-.header-content p{
+.header-content p {
     font-size: 18px;
     max-width: 80%;
     margin-right: auto;
@@ -176,76 +215,86 @@
     width: 484px;
     vertical-align: top;
     border-radius: 2px;
-    /* box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08); */
-    /* transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1); */
     border: 0px;
     text-align: center;
 }
+
 .search-term:hover {
-    transform: scale(1.05,1.05);
+    transform: scale(1.05, 1.05);
 }
-section{
-    /* padding: 100px 0; */
-    /* height: 184vh; */
+
+section {
     min-width: 322px;
 }
 
 .bg-primary {
-  background-color: #F05F40 !important;
+    background-color: #F05F40 !important;
 }
 
-.each{
+.each {
     width: 20%;
     float: left;
-    /* padding: 0px; */
-    /* border-left: 5px solid white; */
     height: 100%;
-    /* text-align: -webkit-auto; */
-    /* padding-top: 5px; */
     box-sizing: border-box;
     border-left: 2px solid white;
     text-align: left;
-    /* padding-left: 0px; */
 }
-.header{
+
+.header {
     background: #8a97a0;
     color: #FFF;
     font-weight: 400;
     text-align: center;
     height: 46px;
 }
-.exchange-table:nth-of-type(odd){
+
+.exchange-table:nth-of-type(odd) {
     background: #e8eeef;
 }
-.exchange-table{
+
+.exchange-table {
     height: 60px;
     width: 100%;
     overflow: hidden;
     background: #f4f7f8;
-    /* border-bottom: 1px solid #FFF; */
     margin-bottom: 5px;
     text-align: left;
-    /* padding-top: 10px; */
-    /* padding-bottom: 10px; */
     min-width: 254px;
 }
-.exchange-table:hover{
+
+.exchange-table:hover {
     transform: scale(1.05, 1.05);
 }
-.exchange1{
+
+.exchange1 {
     border-right: 1px solid white;
     padding: 14px;
     text-decoration: none;
 }
-.exchange-container{margin: 50px;}
-.usd1{padding 1px: 1px solid black;padding-top: 18px;border-left: 1px solid white;/* height: 100%; */}
-.sevendays{padding-top: 18px;}
-.high1{padding-top: 18px;}
-.low1{
-    padding-top: 18px;
-    /* border-left: 0px solid white; */
+
+.exchange-container {
+    margin: 50px;
 }
-.coin-choice-button{
+
+.usd1 {
+    padding 1px: 1px solid black;
+    padding-top: 18px;
+    border-left: 1px solid white;
+}
+
+.sevendays {
+    padding-top: 18px;
+}
+
+.high1 {
+    padding-top: 18px;
+}
+
+.low1 {
+    padding-top: 18px;
+}
+
+.coin-choice-button {
     font-size: 2rem;
     font-weight: 700;
     margin-top: 0;
@@ -254,11 +303,11 @@ section{
     text-align: center;
     color: white;
 }
-.footer{
+
+.footer {
     position: fixed;
     bottom: 0;
     background-color: #e4e4e4;
-    /* display: block; */
     width: 100%;
     height: 52px;
 }

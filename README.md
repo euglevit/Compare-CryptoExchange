@@ -6,7 +6,7 @@
 The main page.
 ![Main Page](/MainPage.png "Optional Title")
 
-The main page with a highlighted Crypto Coin.
+The main page with A CryptoCoin being hovered over.
 ![Main Page with highlights](/MainPage2.png "Optional Title")
 
 The results page, which lists the different exchanges and the price.The user is able to hit a link to the exchange if they want.
