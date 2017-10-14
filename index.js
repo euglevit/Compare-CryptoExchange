@@ -86,17 +86,17 @@ $(document).ready(function() {
 				allCoins = data;
 				for (let i = 0; i < 3; i++) {
 						if (parseInt(allCoins[i].percent_change_7d) < 0) {
-								$('.cryptoList').append(
+								$('.center').append(
 										`
-												<button class='cryptoCoin coin' val=${allCoins[i].symbol}><span class='stock-name'>
-												${allCoins[i].name}<span class='stock-symbol'>(${allCoins[i].symbol})</span></span> <span class='stock-price'>$${allCoins[i].price_usd}<span class='color-red stock-percent'>&#9660 ${allCoins[i].percent_change_7d}</span></span></button>
+												<div class='coin-width'><button class='cryptoCoin coin' val=${allCoins[i].symbol}><span class='stock-name'>
+												${allCoins[i].name}<span class='stock-symbol'>(${allCoins[i].symbol})</span></span> <span class='stock-price'>$${allCoins[i].price_usd}<span class='color-red stock-percent'>&#9660 ${allCoins[i].percent_change_7d}</span></span></button></div>
 								`
 								);
 						} else if (parseInt(allCoins[i].percent_change_7d) >= 0) {
-								$('.cryptoList').append(
+								$('.center').append(
 										`
-												<button class='cryptoCoin coin' val=${allCoins[i].symbol}><span class='stock-name'>
-												${allCoins[i].name}<span class='stock-symbol'>(${allCoins[i].symbol})</span></span> <span class='stock-price'>$${allCoins[i].price_usd}<span class='color-green stock-percent'>&#9650 ${allCoins[i].percent_change_7d}</span></span></button>
+												<div class='coin-width'><button class='cryptoCoin coin' val=${allCoins[i].symbol}><span class='stock-name'>
+												${allCoins[i].name}<span class='stock-symbol'>(${allCoins[i].symbol})</span></span> <span class='stock-price'>$${allCoins[i].price_usd}<span class='color-green stock-percent'>&#9650 ${allCoins[i].percent_change_7d}</span></span></button></div>
 								`
 								);
 						}
@@ -104,19 +104,20 @@ $(document).ready(function() {
 				}
 				newStatus = Object.keys(allCoins).find(key => allCoins[key].symbol ===
 						saveStatus);
-				$('.cryptoList').append(
-						`
-						<div><button class='next-button' role='presentation'></button></div>`);
+				// $('.cryptoList').append(
+				// 		`
+				// 		<div><button class='next-button' role='presentation'></button></div>`);
 
 		}
 
 		//creates the table for the Exchange List
 		function renderExchangeList(coinChoice) {
 				$('.exchangeList').html('');
-				$('.exchangeList').css('height', '100vh');
+				// $('section').css('height', '100%');
+				// $('section').css('padding','100px 0');
 				$('.second-page-container').css('height', '100vh');
 				$('.exchangeList').html(
-						`<div class='table-name'><h1 role='presentation' class='coin-choice-button'>${coinChoice}</h1><button class='startOver'></button></div><div class="exchange-container"></div>`
+						`<div class='table-name'><h2 role='presentation' class='coin-choice-button'>${coinChoice}</h2><button class='startOver'></button></div><div class="exchange-container"></div>`
 				);
 				$('.exchange-container').append(
 					`
@@ -163,39 +164,6 @@ $(document).ready(function() {
 														`
 
 														);
-
-
-									
-												// 		$('.exchanges-list').append(
-												// 				`
-												// 				<div class="col exchange1" align="center"><a class='links' href='https://www.${data3[i]}.com'>${data3[i]}</a></div>
-																
-												// `
-												// 		);
-												// 		$('.usd-list').append(
-												// 				`
-												// 				<div class="col usd1"  align="center">$ ${info.Data[30].close}</div>
-																
-												// `
-												// 		);
-												// 		$('.usd7-list').append(
-												// 				`
-												// 				<div class="col sevendays" align="center">$ ${info.Data[23].close}</div>
-																
-												// `
-												// 		);
-												// 		$('.high-list').append(
-												// 				`
-												// 				<div class="col high1" lign="center">$ ${info.Data[30].high}</div>
-																
-												// `
-												// 		);
-												// 		$('.low-list').append(
-												// 				`
-												// 				<div class="col low1" align="center">$ ${info.Data[30].low}</div>
-																
-												// `
-												// 		);
 												} else{
 													console.log('not in exchange');
 												}
@@ -203,21 +171,28 @@ $(document).ready(function() {
 								};
 						};
 				})
+				setTimeout(function(){
+					let sectionHeight = $('.exchangeList').css('height');
+					console.log(sectionHeight);
+				$('section').css('min-height',sectionHeight);
+			},700);
+				
 		}
 
 		//closes the second-page-container and opens the first-page-container up again
 		function startOver() {
 				$(document).on('click', '.startOver', function(event) {
 						event.preventDefault();
-						$('.first-page-container').show(1000);
+						console.log('one');
 						$('html, body').animate({
-								scrollTop: $(".first-page-container").offset().top
+								scrollTop: $(".masthead").offset().top
 						}, 1000);
+						console.log('two');
 						setTimeout(function() {
 								$('.exchangeList').html('')
 						}, 850);
 						setTimeout(function() {
-								$('.second-page-container, .exchangeList').css('height', '0%')
+								$('.second-page-container').css('height', '0%')
 						}, 900);
 
 				})
@@ -246,34 +221,58 @@ $(document).ready(function() {
 		startOver();
 
 		//If the user hit's one of the coin buttons or the search button, the clickCoin function will activate with the parameter = to that coin.
-		$(document).on('click', '.cryptoCoin, .search-button', function(event) {
+		$(document).on('submit', '.search-form', function(event) {
+				event.preventDefault();
+				let searching = $('.search-term').val().toUpperCase();
+				console.log(searching);
+				clickCoin(searching);
+
+		});
+
+		$(document).on('click', '.cryptoCoin', function(event) {
 				event.preventDefault();
 				let searching = $('.search-term').val().toUpperCase();
 				$('.search-button').attr('val', searching);
-				clickCoin($(this).attr('val'));
+				console.log(searching);
+				clickCoin(searching);
 
+		});
+
+		$(window).resize(function(){
+			let cutoff = 540;
+
+			if($(window).width() < cutoff){
+				let sectionHeight = $('.exchangeList').css('height');
+				console.log(sectionHeight);
+				$('section').css('min-height',sectionHeight);
+			};
+			if($(window).width() > cutoff){
+				let sectionHeight = $('.exchangeList').css('height');
+				console.log(sectionHeight);
+				$('section').css('min-height',sectionHeight);
+			};
 		});
 
 
 		//changes placeholder text depending on Window Size
-		$(window).resize(function(){
-			let cutoff = 653,
-        	placeholderShort = "Search Coins by symbol(BTC,ETH)",
-        	placeholderLong = "Type in the symbol for your favorite CryptoCoin(e.g BTC,ETH) to prices";
+		// $(window).resize(function(){
+		// 	let cutoff = 653,
+  //       	placeholderShort = "Search Coins by symbol(BTC,ETH)",
+  //       	placeholderLong = "Type in the symbol for your favorite CryptoCoin(e.g BTC,ETH) to prices";
     
-    		if($(window).width() >= cutoff) {
-		      $('.search-term').attr('placeholder', placeholderLong); 
-		    }
-		    else {
-		      $('.search-term').attr('placeholder', placeholderShort); 
-		    } 
-		});
+  //   		if($(window).width() >= cutoff) {
+		//       $('.search-term').attr('placeholder', placeholderLong); 
+		//     }
+		//     else {
+		//       $('.search-term').attr('placeholder', placeholderShort); 
+		//     } 
+		// });
 
-		if ($(window).width() < 667 ) {
-			$(".search-term").attr("placeholder","Search Coins by symbol(BTC,ETH)");
-		}else { 
-			$(".search-term").attr("placeholder","Type in the symbol for your favorite CryptoCoin(e.g BTC,ETH) to prices");
-		}
+		// if ($(window).width() < 667 ) {
+		// 	$(".search-term").attr("placeholder","Search Coins by symbol(BTC,ETH)");
+		// }else { 
+		// 	$(".search-term").attr("placeholder","Type in the symbol for your favorite CryptoCoin(e.g BTC,ETH) to prices");
+		// }
 
 
 
