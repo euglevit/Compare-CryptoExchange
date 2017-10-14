@@ -1,7 +1,17 @@
 .html{
     box-sizing: border-box;
 }
-
+.startOver{
+    display: block;
+    margin: auto;
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    padding: 6px;
+    transform: rotate(-135deg);
+    background-color: #f05f40;
+    position: relative;
+    vertical-align: middle;
+}
 .masthead{
     background-image: url('https://images.pexels.com/photos/34204/pexels-photo.jpg?h=350&dpr=2&auto=compress&cs=tinysrgb');
     height: 100%;
@@ -24,6 +34,9 @@
     float: left;
     height: 100%;
     width: 100%;
+}
+.cryptoCoin:hover {
+    transform: scale(1.05, 1.05);
 }
 .cryptoList {
     height: 100%;
@@ -59,9 +72,13 @@
         font-size: 14px;
     }
 }
-@media all and (max-width: 644px){
+
+@media all and (max-width: 656px){
     .exchange-container{
         font-size: 12px;
+    }
+    .header-content h1{
+        font-size: 40px !important;
     }
 }
 
@@ -127,6 +144,7 @@
     /* max-width: 1000px; */
     margin-left: auto;
     margin-right: auto;
+    min-width: 243px;
 }
 
 .header-content h1{
@@ -161,10 +179,15 @@
     /* box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08); */
     /* transition: box-shadow 200ms cubic-bezier(0.4, 0.0, 0.2, 1); */
     border: 0px;
+    text-align: center;
+}
+.search-term:hover {
+    transform: scale(1.05,1.05);
 }
 section{
     /* padding: 100px 0; */
     /* height: 184vh; */
+    min-width: 322px;
 }
 
 .bg-primary {
@@ -189,7 +212,7 @@ section{
     color: #FFF;
     font-weight: 400;
     text-align: center;
-    height: 40px;
+    height: 46px;
 }
 .exchange-table:nth-of-type(odd){
     background: #e8eeef;
@@ -204,6 +227,7 @@ section{
     text-align: left;
     /* padding-top: 10px; */
     /* padding-bottom: 10px; */
+    min-width: 254px;
 }
 .exchange-table:hover{
     transform: scale(1.05, 1.05);

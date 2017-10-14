@@ -89,14 +89,14 @@ $(document).ready(function() {
 								$('.center').append(
 										`
 												<div class='coin-width'><button class='cryptoCoin coin' val=${allCoins[i].symbol}><span class='stock-name'>
-												${allCoins[i].name}<span class='stock-symbol'>(${allCoins[i].symbol})</span></span> <span class='stock-price'>$${allCoins[i].price_usd}<span class='color-red stock-percent'>&#9660 ${allCoins[i].percent_change_7d}</span></span></button></div>
+												${allCoins[i].name}<span class='stock-symbol'>(${allCoins[i].symbol})</span></span> <span class='stock-price'>$${allCoins[i].price_usd}<span class='color-red stock-percent'>&#9660 ${allCoins[i].percent_change_24h}%</span></span></button></div>
 								`
 								);
 						} else if (parseInt(allCoins[i].percent_change_7d) >= 0) {
 								$('.center').append(
 										`
 												<div class='coin-width'><button class='cryptoCoin coin' val=${allCoins[i].symbol}><span class='stock-name'>
-												${allCoins[i].name}<span class='stock-symbol'>(${allCoins[i].symbol})</span></span> <span class='stock-price'>$${allCoins[i].price_usd}<span class='color-green stock-percent'>&#9650 ${allCoins[i].percent_change_7d}</span></span></button></div>
+												${allCoins[i].name}<span class='stock-symbol'>(${allCoins[i].symbol})</span></span> <span class='stock-price'>$${allCoins[i].price_usd}<span class='color-green stock-percent'>&#9650 ${allCoins[i].percent_change_24h}%</span></span></button></div>
 								`
 								);
 						}
@@ -231,7 +231,7 @@ $(document).ready(function() {
 
 		$(document).on('click', '.cryptoCoin', function(event) {
 				event.preventDefault();
-				let searching = $('.search-term').val().toUpperCase();
+				let searching = $(this).attr('val').toUpperCase();
 				$('.search-button').attr('val', searching);
 				console.log(searching);
 				clickCoin(searching);
