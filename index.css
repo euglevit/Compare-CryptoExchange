@@ -229,6 +229,7 @@ section {
 
 .bg-primary {
     background-color: #F05F40 !important;
+    min-height: 300px;
 }
 
 .each {
