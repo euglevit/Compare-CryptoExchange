@@ -3,8 +3,8 @@
 }
 
 .startOver {
-    display: block;
-    margin: auto;
+    /* display: block; */
+    /* margin: auto; */
     border: solid black;
     border-width: 0 3px 3px 0;
     padding: 6px;
@@ -98,81 +98,65 @@
     }
     .each {
         float: none !important;
-        margin-bottom: -400px;
+        /* margin-bottom: -400px; */
         width: 98% !important;
         text-align: right !important;
         font-size: 22px;
+        height: 35px !important;
+        padding: 0px !important;
+        border: 2px solid transparent !important;
+    }
+    .exchange1{
+
+    }
+    .usd1{
+        height: 100%;
+        /* padding: 100px; */
     }
     .exchange-table {
-        height: 500px !important;
+        height: 173px !important;
         font-size: 42px;
     }
     .exchange1:before {
         content: "Exchange: ";
-        position: absolute;
-        left: 55px;
         font-size: 23px;
+        overflow: hidden;
+        float: left;
     }
     .usd1:before {
         content: "USD: ";
-        position: absolute;
         left: 55px;
+        float: left;
     }
     .sevendays:before {
         content: "1 Week Ago: ";
-        position: absolute;
         left: 55px;
+        float: left;
     }
     .high1:before {
         content: "High: ";
-        position: absolute;
         left: 55px;
+        float: left;
     }
     .low1:before {
         content: "Low: ";
-        position: absolute;
         left: 55px;
+        float: left;
     }
     .exchange-table:hover .exchange1:before {
-        left: 0px;
+        /* left: 0px; */
     }
     .exchange-table:hover .usd1:before {
-        left: 0px;
+        /* left: 0px; */
     }
     .exchange-table:hover .sevendays:before {
-        left: 0px;
+        /* left: 0px; */
     }
     .exchange-table:hover .high1:before {
-        left: 0px;
+        /* left: 0px; */
     }
     .exchange-table:hover .low1:before {
-        left: 0px;
-    }
-    .exchange1:hover::before {
-        content: "Exchange: ";
-        position: absolute;
-        left: 0px;
-        font-size: 23px;
-    }
-    .usd1:before::hover {
-        content: "USD: ";
-        position: absolute;
-        left: 0px;
-    }
-    .sevendays:before::hover {
-        content: "1 Week Ago: ";
-        position: absolute;
-        left: 0px;
-    }
-    .high1:before::hover {
-        content: "High: ";
-        position: absolute;
-        left: 0px;
-    }
-    .low1:before::hover {
-        content: "Low: ";
-        position: absolute;
-        left: 0px;
+        /* left: 0px; */
     }
 }
 
@@ -229,13 +213,18 @@ section {
 
 .bg-primary {
     background-color: #F05F40 !important;
-    overflow: auto;
+    overflow: scroll;
+    /* height: 101%; */
+}
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
 }
 
 .each {
     width: 20%;
     float: left;
-    height: 100%;
+    height: 87%;
     box-sizing: border-box;
     border-left: 2px solid white;
     text-align: left;
@@ -247,6 +236,7 @@ section {
     font-weight: 400;
     text-align: center;
     height: 46px;
+    vertical-align: middle;
 }
 
 .exchange-table:nth-of-type(odd) {
@@ -254,7 +244,7 @@ section {
 }
 
 .exchange-table {
-    height: 60px;
+    /* height: 60px; */
     width: 100%;
     overflow: hidden;
     background: #f4f7f8;
@@ -262,15 +252,19 @@ section {
     text-align: left;
     min-width: 254px;
 }
-
-.exchange-table:hover {
-    transform: scale(1.05, 1.05);
+.table-name{
+    text-align: center;
+}
+.vertical{
+    vertical-align: middle;
+    line-height: 46px;
 }
 
 .exchange1 {
     border-right: 1px solid white;
     padding: 14px;
     text-decoration: none;
+    height: 67px;
 }
 
 .exchange-container {
@@ -301,8 +295,10 @@ section {
     margin-top: 0;
     margin-bottom: 0;
     text-transform: uppercase;
-    text-align: center;
+    /* text-align: center; */
     color: white;
+    display: inline;
+    padding-right: 28px;
 }
 
 .footer {

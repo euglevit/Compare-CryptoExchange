@@ -49,11 +49,11 @@ $(document).ready(function() {
 		);
 		$('.exchange-container').append(
 			`
-			<div class='each header'>Exchange</div>
-			<div class='each header'>Price</div>
-			<div class='each header'>Price(1 Week Prior)</div>
-			<div class='each header'>High</div>
-			<div class='each header'>Low</div>
+			<div class='each header'><span class='vertical'>Exchange</span></div>
+			<div class='each header'><span class='vertical'>Price</span></div>
+			<div class='each header'><span class='vertical'>7 Days Ago</span></div>
+			<div class='each header'><span class='vertical'>High</span></div>
+			<div class='each header'><span class='vertical'>Low</span></div>
 			`
 		);
 	}
