@@ -254,6 +254,7 @@ section {
 }
 .table-name{
     text-align: center;
+    margin-top: 40px;
 }
 .vertical{
     vertical-align: middle;
