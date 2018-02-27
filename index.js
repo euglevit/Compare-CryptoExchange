@@ -71,13 +71,12 @@ $(document).ready(function() {
 						e: data3[i]
 					}, function(info) {
 						if (info.Data[i] === undefined) {
-							console.log('no market');
 						} else if (parseInt(info.Data[i].volumefrom) !=
 							0) {
 							$('.exchange-container').append(
 								`
 								<div class='exchange-table'>
-								<div class='each exchange1'><a class='''links' href='https://www.${data3[i]}.com'>${data3[i]}</a></div>
+								<div class='each exchange1'><a class='links' href='https://www.${data3[i]}.com'>${data3[i]}</a></div>
 								<div class="each usd1">$ ${info.Data[30].close}</div>
 								<div class="each sevendays">$ ${info.Data[23].close}</div>
 								<div class="each high1">$ ${info.Data[30].high}</div>
@@ -87,7 +86,7 @@ $(document).ready(function() {
 
 							);
 						} else {
-							console.log('not in exchange');
+							console.log('');
 						}
 					});
 				};
@@ -95,7 +94,6 @@ $(document).ready(function() {
 		})
 		setTimeout(function() {
 			let sectionHeight = $('.exchangeList').css('height');
-			console.log(sectionHeight);
 			$('section').css('min-height', sectionHeight);
 		}, 700);
 
@@ -105,11 +103,9 @@ $(document).ready(function() {
 	function startOver() {
 		$(document).on('click', '.startOver', function(event) {
 			event.preventDefault();
-			console.log('one');
 			$('html, body').animate({
 				scrollTop: $(".masthead").offset().top
 			}, 1000);
-			console.log('two');
 			setTimeout(function() {
 				$('.exchangeList').html('')
 			}, 850);
@@ -140,7 +136,6 @@ $(document).ready(function() {
 	$(document).on('submit', '.search-form', function(event) {
 		event.preventDefault();
 		let searching = $('.search-term').val().toUpperCase();
-		console.log(searching);
 		clickCoin(searching);
 
 	});
@@ -150,7 +145,6 @@ $(document).ready(function() {
 		event.preventDefault();
 		let searching = $(this).attr('val').toUpperCase();
 		$('.search-button').attr('val', searching);
-		console.log(searching);
 		clickCoin(searching);
 
 	});
@@ -161,12 +155,10 @@ $(document).ready(function() {
 
 		if ($(window).width() < cutoff) {
 			let sectionHeight = $('.exchangeList').css('height');
-			console.log(sectionHeight);
 			$('section').css('min-height', sectionHeight);
 		};
 		if ($(window).width() > cutoff) {
 			let sectionHeight = $('.exchangeList').css('height');
-			console.log(sectionHeight);
 			$('section').css('min-height', sectionHeight);
 		};
 	});
