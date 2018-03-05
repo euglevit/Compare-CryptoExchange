@@ -300,7 +300,7 @@ section {
 }
 
 .usd1 {
-    padding 1px: 1px solid black;
+    padding: 1px solid black;
     padding-top: 18px;
     border-left: 1px solid white;
 }
